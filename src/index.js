@@ -3,7 +3,7 @@ const { app, BrowserWindow, Tray, Menu, ipcMain } = require('electron');
 
 let mainWindow, tray;
 
-const iconPath = require.resolve('./favicon.png');
+const iconPath = require.resolve(path.join(__dirname, 'icon.png'));
 
 const initialize = () => {
   mainWindow = new BrowserWindow({
@@ -39,7 +39,7 @@ const initialize = () => {
   // mainWindow.webContents.openDevTools();
 
   // Render HTML file
-  mainWindow.loadFile(path.join(__dirname, 'index.html'));
+  mainWindow.loadFile(path.join(__dirname, 'frontend', 'index.html'));
 
   // Events
   mainWindow.on('minimize', function(event) {

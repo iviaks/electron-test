@@ -1,14 +1,44 @@
 {
   "name": "electron-simple",
-  "version": "1.0.0",
-  "main": "index.js",
+  "version": "0.0.1",
+  "description": "Electron simple example",
   "license": "MIT",
+  "author": {
+    "name": "Max Saykov",
+    "email": "maxsaykov1@gmail.com"
+  },
+  "main": "src/index.js",
   "dependencies": {
-    "electron": "^4.0.1",
     "jquery": "^3.3.1",
     "materialize-css": "^1.0.0-rc.2"
   },
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "build": "electron-builder build -p always"
+  },
+  "devDependencies": {
+    "electron-builder": "^20.38.5",
+    "electron": "^4.0.1"
+  },
+  "build": {
+    "appId": "com.electron.electron-test",
+    "productName": "Electron Simple Application",
+    "artifactName": "${productName}-${version}-${os}.${ext}",
+    "copyright": "Copyright © 2019 iViaks",
+    "linux": {
+      "target": ["deb"]
+    },
+    "win": {
+      "target": ["nsis"]
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "iviaks",
+        "repo": "electron-test"
+      }
+    ]
   }
 }

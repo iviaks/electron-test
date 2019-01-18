@@ -31,7 +31,8 @@
       "target": ["deb"]
     },
     "win": {
-      "target": ["nsis"]
+      "target": ["nsis"],
+      "icon": "build/icons/icon.ico"
     },
     "publish": [
       {

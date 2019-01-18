@@ -1,5 +1,15 @@
+require('dotenv').config();
+
 const path = require('path');
-const { app, BrowserWindow, Tray, Menu, ipcMain } = require('electron');
+const { BrowserWindow, Tray, Menu } = require('electron');
+const { app, ipcMain, protocol } = require('electron');
+
+const log = require('electron-log');
+const { autoUpdater } = require('electron-updater');
+
+autoUpdater.logger = log;
+autoUpdater.logger.transports.file.level = 'info';
+log.info('App starting...');
 
 let mainWindow, tray;
 
@@ -58,7 +68,23 @@ const initialize = () => {
 };
 
 app.on('ready', initialize);
+app.on('ready', () => {
+  // autoUpdater.checkForUpdates();
+});
 
 ipcMain.on('close-window', (event, arg) => {
   app.quit();
+});
+
+autoUpdater.on('checking-for-update', () => {});
+autoUpdater.on('update-available', () => {});
+autoUpdater.on('update-not-available', () => {});
+autoUpdater.on('error', err => {});
+autoUpdater.on('download-progress', progressObj => {});
+autoUpdater.on('update-downloaded', info => {
+  autoUpdater.quitAndInstall();
+});
+
+process.on('uncaughtException', async err => {
+  log.error(err);
 });
